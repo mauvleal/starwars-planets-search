@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Table() {
-  const { data } = useContext(PlanetContext);
+  const { data, filterByName } = useContext(PlanetContext);
 
   return (
 
@@ -25,11 +25,41 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {data.length ? data
-          .map((planet) => (
-            <tr key={ planet.name }>
-              {Object.values(planet).map((value, i) => <td key={ i }>{value}</td>)}
-            </tr>)) : null}
+        {filterByName.length > 0 ? (
+          filterByName.map((e, i) => (
+            <tr key={ i }>
+              <td data-testid="planet-name">{e.name}</td>
+              <td>{e.rotation_period}</td>
+              <td>{e.orbital_period}</td>
+              <td>{e.diameter}</td>
+              <td>{e.climate}</td>
+              <td>{e.gravity}</td>
+              <td>{e.terrain}</td>
+              <td>{e.surface_water}</td>
+              <td>{e.population}</td>
+              <td>{e.films}</td>
+              <td>{e.created}</td>
+              <td>{e.edited}</td>
+              <td>{e.url}</td>
+            </tr>
+          ))
+        ) : (data.map((e, i) => (
+          <tr key={ i }>
+            <td data-testid="planet-name">{e.name}</td>
+            <td>{e.rotation_period}</td>
+            <td>{e.orbital_period}</td>
+            <td>{e.diameter}</td>
+            <td>{e.climate}</td>
+            <td>{e.gravity}</td>
+            <td>{e.terrain}</td>
+            <td>{e.surface_water}</td>
+            <td>{e.population}</td>
+            <td>{e.films}</td>
+            <td>{e.created}</td>
+            <td>{e.edited}</td>
+            <td>{e.url}</td>
+          </tr>
+        )))}
       </tbody>
     </table>
 
