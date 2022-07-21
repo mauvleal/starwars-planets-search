@@ -3,25 +3,36 @@ import PlanetContext from '../context/PlanetContext';
 
 function Table() {
   const { data } = useContext(PlanetContext);
-  console.log(useContext(PlanetContext));
-  return (
-    <table>
 
+  return (
+
+    <table>
       <thead>
         <tr>
-          { data.length && Object.keys(data[0])
-            .map((item) => <th key={ item }>{item}</th>)}
+          <th>Name</th>
+          <th>Rotation Period</th>
+          <th>Orbital Period</th>
+          <th>Diameter</th>
+          <th>Climate</th>
+          <th>Gravity</th>
+          <th>Terrain</th>
+          <th>Surface Water</th>
+          <th>Population</th>
+          <th>Films</th>
+          <th>Created</th>
+          <th>Edited</th>
+          <th>URL</th>
         </tr>
       </thead>
       <tbody>
-        {data.length && data
+        {data.length ? data
           .map((planet) => (
             <tr key={ planet.name }>
               {Object.values(planet).map((value, i) => <td key={ i }>{value}</td>)}
-            </tr>))}
+            </tr>)) : null}
       </tbody>
-
     </table>
+
   );
 }
 
