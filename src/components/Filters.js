@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
-// import PlanetContext from '../context/PlanetContext';
 
 function Input() {
   const { column, setColumn, comparison, setComparison,
-    number, setNumber, setFilters, data, setData } = useContext(PlanetContext);
+    number, setNumber, setFilters, data, setData, allColumn,
+    setAllColumn } = useContext(PlanetContext);
+
+  const removeColumn = () => {
+    const newColumnsArray = allColumn.filter((item) => item !== column);
+    setAllColumn(newColumnsArray);
+    setColumn(allColumn[0]);
+  };
 
   const handleClick = () => {
-    setFilters(() => [{ column, comparison, number }]);
-    console.log(column, comparison, number);
-    console.log(data);
+    setFilters((prev) => [...prev, { column, comparison, number }]);
     const setFilter = data.filter((planet) => {
       const valueColumn = Number(planet[column]);
       const valueNumber = Number(number);
@@ -23,6 +27,7 @@ function Input() {
       return valueColumn === valueNumber;
     });
     setData(setFilter);
+    removeColumn();
   };
 
   return (
@@ -34,11 +39,11 @@ function Input() {
           name="column-filter"
           onChange={ ({ target: { value } }) => setColumn(value) }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {
+            allColumn.map((col) => (
+              <option key={ col } value={ col }>{col}</option>
+            ))
+          }
         </select>
       </label>
 
@@ -48,7 +53,7 @@ function Input() {
           data-testid="comparison-filter"
           name="comparison-filter"
           onChange={ ({ target: { value } }) => setComparison(value) }
-
+        //   value={ comparison }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>

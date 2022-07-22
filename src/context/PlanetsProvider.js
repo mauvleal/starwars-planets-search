@@ -9,13 +9,13 @@ function PlanetsProvider({ children }) {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [allColumn, setAllColumn] = useState(['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water']);
 
   const handleFilterByName = (value) => {
-    console.log(value);
     if (value !== '') {
       const planetsFiltered = data.filter((item) => item.name
         .toLowerCase().includes(value));
-      console.log(planetsFiltered);
       return setFilterByName(planetsFiltered);
     }
     setFilterByName(data);
@@ -26,7 +26,6 @@ function PlanetsProvider({ children }) {
       const result = await fetch('https://swapi-trybe.herokuapp.com/api/planets/').then((response) => response.json());
       const toSave = result.results;
       toSave.forEach((plan) => delete plan.residents);
-      console.log(toSave);
       setData(toSave);
     };
     fetchPlanetsData();
@@ -45,6 +44,8 @@ function PlanetsProvider({ children }) {
     setNumber,
     filters,
     setFilters,
+    allColumn,
+    setAllColumn,
 
   };
 
