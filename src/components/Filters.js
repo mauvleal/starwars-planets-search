@@ -3,7 +3,7 @@ import PlanetContext from '../context/PlanetContext';
 import fetchPlanetsData from '../services/fetchPlanetsData';
 // import fetchPlanetsData from '../services/fetchPlanetsData';
 
-function Input() {
+function Filters() {
   const { column, setColumn, comparison, setComparison,
     number, setNumber, setFilters, data, setData, allColumn,
     setAllColumn } = useContext(PlanetContext);
@@ -99,4 +99,4 @@ function Input() {
   );
 }
 
-export default Input;
+export default Filters;
