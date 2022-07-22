@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
+import fetchPlanetsData from '../services/fetchPlanetsData';
+// import fetchPlanetsData from '../services/fetchPlanetsData';
 
 function Input() {
   const { column, setColumn, comparison, setComparison,
@@ -28,6 +30,15 @@ function Input() {
     });
     setData(setFilter);
     removeColumn();
+  };
+
+  const removeFilters = async () => {
+    setFilters([]);
+    setAllColumn(['population', 'orbital_period',
+      'diameter', 'rotation_period', 'surface_water']);
+    setNumber(0);
+    const newData = await fetchPlanetsData();
+    setData(newData);
   };
 
   return (
@@ -75,6 +86,14 @@ function Input() {
         onClick={ () => handleClick() }
       >
         Filtrar
+      </button>
+
+      <button
+        data-testid="button-remove-filters"
+        type="button"
+        onClick={ () => removeFilters() }
+      >
+        Remover Filtros
       </button>
     </div>
   );
