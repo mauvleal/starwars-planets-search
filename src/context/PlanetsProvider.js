@@ -5,6 +5,10 @@ import PlanetContext from './PlanetContext';
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
   const [filterByName, setFilterByName] = useState({});
+  const [filters, setFilters] = useState([]);
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [number, setNumber] = useState(0);
 
   const handleFilterByName = (value) => {
     console.log(value);
@@ -33,6 +37,14 @@ function PlanetsProvider({ children }) {
     setData,
     filterByName,
     handleFilterByName,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    number,
+    setNumber,
+    filters,
+    setFilters,
 
   };
 
