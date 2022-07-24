@@ -11,6 +11,7 @@ function Input() {
 
   return (
     <div>
+      <h1>Star Wars</h1>
       <input
         data-testid="name-filter"
         type="text"

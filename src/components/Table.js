@@ -6,7 +6,7 @@ function Table() {
 
   return (
 
-    <table>
+    <table data-testid="table">
       <thead>
         <tr>
           <th>Name</th>
