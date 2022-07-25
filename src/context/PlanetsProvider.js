@@ -27,8 +27,17 @@ function PlanetsProvider({ children }) {
       const result = await fetch('https://swapi-trybe.herokuapp.com/api/planets/').then((response) => response.json());
       const toSave = result.results;
       toSave.forEach((plan) => delete plan.residents);
-      setBackup(toSave);
-      setData(toSave);
+
+      const newOrder = toSave?.sort((x, y) => {
+        const a = x.name.toUpperCase();
+        const b = y.name.toUpperCase();
+        const num = -1;
+        if (a === b) return 0;
+        return a > b ? 1 : num;
+      });
+
+      setBackup(newOrder);
+      setData(newOrder);
     };
     fetchPlanetsData();
   }, []);

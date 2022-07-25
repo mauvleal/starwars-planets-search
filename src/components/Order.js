@@ -1,12 +1,28 @@
-import React, { } from 'react';
+import React, { useContext, useState } from 'react';
+import PlanetContext from '../context/PlanetContext';
 // import PlanetContext from '../context/PlanetContext';
 
 function Order() {
+  const { data, setData } = useContext(PlanetContext);
   const columns = ['population',
     'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
 
-  // const [column, setColumn] = useState('');
-  // const [sort, setSort] = useState('');
+  const [column, setColumn] = useState('population');
+  const [sort, setSort] = useState('ASC');
+
+  const handleSortFilter = (colum, sorted) => {
+    setSort({
+      order: {
+        colum,
+        sort: sorted,
+      },
+    });
+    const newData = data.filter((item) => item[column] !== 'unknown');
+    if (sort === 'ASC') {
+      return setData(newData.sort((a, b) => Number(a[column]) - Number(b[column])));
+    }
+    setData(newData.sort((a, b) => Number(b[column]) - Number(a[column])));
+  };
 
   return (
     <div>
@@ -42,7 +58,7 @@ function Order() {
       <button
         type="button"
         data-testid="column-sort-button"
-        // onClick={ () => handleSortFilter({ column, sort }) }
+        onClick={ () => handleSortFilter({ column, sort }) }
       >
         Order
       </button>
