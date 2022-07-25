@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
+import fetchPlanetsData from '../services/fetchPlanetsData';
 
 const starWarsMock = {
   count: 60,
@@ -229,7 +230,10 @@ const starWarsMock = {
   ],
 };
 
+
+
 describe("Teste filtro numerico", () => {
+   
   test("teste se o nome Star Wars é exibido na tela", () => {
     render(<App />);
     const titleElement = screen.getByRole("heading", { name: /star wars/i });
@@ -324,5 +328,20 @@ describe("Teste filtro numerico", () => {
       expect(screen.getAllByTestId('planet-name')).toHaveLength(8)
   
     })
+
+    test('Testa  API é chamada', () => {
+     const mockFetch = () => {
+        jest.spyOn(global, 'fetch')
+          .mockImplementation(() => Promise.resolve({
+            json: () => Promise.resolve(starWarsMock),
+          }));
+      }
+      mockFetch()
+      render(<App />);
+      
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(global.fetch).toBeCalledWith('https://swapi-trybe.herokuapp.com/api/planets/');
+      
+    });
   
     });

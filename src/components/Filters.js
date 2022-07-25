@@ -63,7 +63,6 @@ function Filters() {
           data-testid="comparison-filter"
           name="comparison-filter"
           onChange={ ({ target: { value } }) => setComparison(value) }
-          //   value={ comparison }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>

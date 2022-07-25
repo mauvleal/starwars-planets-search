@@ -112,6 +112,7 @@ function Header() {
         <div id={ filter.column } key={ i } data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.number}`}
           <button
+            data-testid={ `remove-single${i}` }
             type="button"
             value={ filter.column }
             onClick={ removeFilter }

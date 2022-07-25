@@ -24,7 +24,7 @@ function Table() {
           <th>URL</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-testid="body">
         {filterByName.length > 0 ? (
           filterByName.map((e, i) => (
             <tr key={ i }>

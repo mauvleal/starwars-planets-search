@@ -26,8 +26,33 @@ describe('Teste Input', () => {
         expect(input).toBeInTheDocument()
         expect(await screen.findAllByTestId('planet-name')).toHaveLength(10)
         userEvent.type(input, 'oo')
+        const planetNaboo = screen.getByRole('cell', { name: /naboo/i });
+        const planetTatooine = screen.getByRole('cell', { name: /tatooine/i });
         expect(screen.getAllByTestId('planet-name')).toHaveLength(2)
+        expect(planetNaboo).toBeInTheDocument;
+        expect(planetTatooine).toBeInTheDocument;
       })
+
+      it('faz os filtros e testa a remoção do filtro por texto', async() => {
+        render(<App/>)
+        const input = screen.getByTestId('name-filter');
+        expect(input).toBeInTheDocument()
+        expect(await screen.findAllByTestId('planet-name')).toHaveLength(10)
+        userEvent.type(input, 'oo')
+        const planetNaboo = screen.getByRole('cell', { name: /naboo/i });
+        const planetTatooine = screen.getByRole('cell', { name: /tatooine/i });
+    
+        expect(planetNaboo).toBeInTheDocument;
+        expect(planetTatooine).toBeInTheDocument;
+    
+        userEvent.type(input, '{backspace}');
+        userEvent.type(input, '{backspace}');
+    
+        const table = screen.getByRole('table');
+    
+        expect(table.lastChild.tagName).toBe('TBODY');
+        expect(table.lastChild.children.length).toBe(10);
+      });
       
     });
   
