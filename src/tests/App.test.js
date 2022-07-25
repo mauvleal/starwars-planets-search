@@ -297,5 +297,32 @@ describe("Teste filtro numerico", () => {
       expect(await screen.findAllByRole('row')).toHaveLength(8);
     
   });
+
+ test('Testando filtro asc e desc', async () => {
+  const { getByTestId, getAllByTestId, findAllByTestId } = render(<App />);
+    const planets = await screen.findAllByTestId('planet-name')
+    const dagoba = screen.getByRole('cell', {  name: /dagobah/i})
+    expect(dagoba).toBeInTheDocument()
+    expect(planets).toHaveLength(10)
+    userEvent.selectOptions(screen.getByTestId('column-sort'), 'population')
+    fireEvent.click(screen.getByTestId('column-sort-input-asc'))
+    fireEvent.click(screen.getByTestId('column-sort-button'))
+    expect(screen.getAllByTestId('planet-name')).toHaveLength(8)
+    // expect(dagoba).not.toBeInTheDocument()
+    // userEvent.click(screen.getByTestId('column-sort-input-desc'))
+    // userEvent.click(screen.getByTestId('column-sort-button'))
+    // expect(dagoba).not.toBeInTheDocument()
+
+  })
+  test('Testando filtro asc e desc', async () => {
+    const { getByTestId, getAllByTestId, findAllByTestId } = render(<App />);
+      const planets = await screen.findAllByTestId('planet-name')
+      expect(planets).toHaveLength(10)
+      userEvent.selectOptions(screen.getByTestId('column-sort'), 'population')
+      fireEvent.click(screen.getByTestId('column-sort-input-desc'))
+      fireEvent.click(screen.getByTestId('column-sort-button'))
+      expect(screen.getAllByTestId('planet-name')).toHaveLength(8)
+  
+    })
   
     });
