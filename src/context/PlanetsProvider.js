@@ -4,6 +4,7 @@ import PlanetContext from './PlanetContext';
 
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
+  const [backup, setBackup] = useState([]);
   const [filterByName, setFilterByName] = useState({});
   const [filters, setFilters] = useState([]);
   const [column, setColumn] = useState('population');
@@ -26,6 +27,7 @@ function PlanetsProvider({ children }) {
       const result = await fetch('https://swapi-trybe.herokuapp.com/api/planets/').then((response) => response.json());
       const toSave = result.results;
       toSave.forEach((plan) => delete plan.residents);
+      setBackup(toSave);
       setData(toSave);
     };
     fetchPlanetsData();
@@ -46,6 +48,8 @@ function PlanetsProvider({ children }) {
     setFilters,
     allColumn,
     setAllColumn,
+    backup,
+    setBackup,
 
   };
 

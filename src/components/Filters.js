@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 import fetchPlanetsData from '../services/fetchPlanetsData';
-// import fetchPlanetsData from '../services/fetchPlanetsData';
 
 function Filters() {
   const { column, setColumn, comparison, setComparison,
@@ -64,7 +63,7 @@ function Filters() {
           data-testid="comparison-filter"
           name="comparison-filter"
           onChange={ ({ target: { value } }) => setComparison(value) }
-        //   value={ comparison }
+          //   value={ comparison }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
