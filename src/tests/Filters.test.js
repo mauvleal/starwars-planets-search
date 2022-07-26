@@ -1,12 +1,23 @@
 import React from 'react';
-import { getAllByTestId, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Input from '../components/Input';
 import App from '../App';
+import planetsMock from './Mock';
 
 describe('Teste Input', () => {
+  beforeEach(() => {
+    jest
+      .spyOn(global, "fetch")
+      .mockResolvedValue({ json: async () => planetsMock });
+    render(<App />);
+  });
+
+  afterEach(() => {
+    global.fetch.mockRestore();
+  });
+
     it('Testando elementos da pagina Input', async () => {
-      render(<App />);
+    
       const input = screen.getByTestId('name-filter');
       const columnFilter = screen.getByTestId('column-filter')
       const button = screen.getByTestId('button-filter');
@@ -21,7 +32,7 @@ describe('Teste Input', () => {
       })
 
       it('Testando input digitando oo', async ()=> {
-        render(<App/>)
+       
         const input = screen.getByTestId('name-filter');
         expect(input).toBeInTheDocument()
         expect(await screen.findAllByTestId('planet-name')).toHaveLength(10)
@@ -34,7 +45,7 @@ describe('Teste Input', () => {
       })
 
       it('faz os filtros e testa a remoção do filtro por texto', async() => {
-        render(<App/>)
+        
         const input = screen.getByTestId('name-filter');
         expect(input).toBeInTheDocument()
         expect(await screen.findAllByTestId('planet-name')).toHaveLength(10)

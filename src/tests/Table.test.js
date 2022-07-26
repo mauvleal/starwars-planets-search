@@ -1,11 +1,22 @@
 import React from 'react';
-import {  cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from '../App';
-import userEvent from '@testing-library/user-event';
+import planetsMock from './Mock';
 
 describe('Testando a Tabela', ()=> {
+  beforeEach(() => {
+    jest
+      .spyOn(global, "fetch")
+      .mockResolvedValue({ json: async () => planetsMock });
+    render(<App />);
+  });
+
+  afterEach(() => {
+    global.fetch.mockRestore();
+  });
+
   test('Testando os componentes da tabela', async () => {
-    render(<App/>)
+  
     const name = screen.getByText(/name/i)
     const rotationPeriod = screen.getByText(/Rotation Period/i)
     const orbitalPeriod = screen.getByText(/Orbital Period/i)
@@ -15,7 +26,7 @@ describe('Testando a Tabela', ()=> {
     const terrain = screen.getByText(/Terrain/i)
     const surfaceWater = screen.getByText(/Surface Water/i)
     const population = screen.getByText(/Population/)
-    const films = screen.getByText(/Films/i)
+    const films = screen.getByText(/Films/)
     const created = screen.getByText(/Created/i)
     const edited = screen.getByText(/Edited/i)
     const URL = screen.getByText(/URL/i)

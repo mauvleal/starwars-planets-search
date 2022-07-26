@@ -25,7 +25,7 @@ function PlanetsProvider({ children }) {
   useEffect(() => {
     const fetchPlanetsData = async () => {
       const result = await fetch('https://swapi-trybe.herokuapp.com/api/planets/').then((response) => response.json());
-      const toSave = result.results;
+      const toSave = await result.results;
       toSave.forEach((plan) => delete plan.residents);
 
       const newOrder = toSave?.sort((x, y) => {

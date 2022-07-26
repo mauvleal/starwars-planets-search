@@ -6,11 +6,6 @@ function Header() {
   const { filters, setFilters, data, setData, setAllColumn,
     setNumber, backup } = useContext(PlanetContext);
 
-  // const removeFilters = async () => {
-  //   const newData = await fetchPlanetsData();
-  //   setData(newData);
-  // };
-
   const removeFilters = async () => {
     const newData = await fetchPlanetsData();
     setFilters([]);
@@ -55,55 +50,6 @@ function Header() {
       setNewData(newArray);
     }
   };
-
-  // const handleClick = async () => {
-  //   const filtered = [];
-  //   setFilters((prev) => [...prev, { column, comparison, number }]);
-  //   for (let i = 0; i < filters.length; i += 1) {
-  //     const filt = data.filter((planet) => {
-  //       const valueColumn = Number(planet[column]);
-  //       const valueNumber = Number(filters[i].number);
-
-  //       if (comparison === 'maior que') {
-  //         return valueColumn > valueNumber;
-  //       }
-  //       if (comparison === 'menor que') {
-  //         return valueColumn < valueNumber;
-  //       }
-  //       return valueColumn === valueNumber;
-  //     });
-  //     filtered.push(filt);
-  //     console.log(filtered);
-  //     console.log(filt);
-  //   }
-  //   setData(filtered);
-  //   removeColumn();
-  // };
-
-  //   const newData = '';
-  //   if (newArray.length === 0) {
-  //     console.log(data);
-  //   }
-  //   for (let i = 0; i < newArray.length; i += 1) {
-  //     console.log(newArray[i]);
-  //     const filt = data.filter((planet) => {
-  //       const valueColumn = Number(planet[column]);
-  //       const valueNumber = Number(newArray[i].number);
-
-  //       if (comparison === 'maior que') {
-  //         return valueColumn > valueNumber;
-  //       }
-  //       if (comparison === 'menor que') {
-  //         return valueColumn < valueNumber;
-  //       }
-  //       return valueColumn === valueNumber;
-  //     });
-  //     console.log(newData);
-  //     newData.push(filt);
-  //     console.log(filt);
-  //   }
-  //   setData(newData);
-  // };
 
   return (
     <div>
