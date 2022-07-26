@@ -48,10 +48,10 @@ describe('Teste Input', () => {
         userEvent.type(input, '{backspace}');
         userEvent.type(input, '{backspace}');
     
-        const table = screen.getByRole('table');
+        const tab = screen.getByRole('table');
     
-        expect(table.lastChild.tagName).toBe('TBODY');
-        expect(table.lastChild.children.length).toBe(10);
+        expect(tab.lastChild.tagName).toBe('TBODY');
+        expect(tab.lastChild.children.length).toBe(10);
       });
       
     });
